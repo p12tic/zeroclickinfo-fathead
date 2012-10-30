@@ -1,2 +1,2 @@
 #!/bin/bash
-./parse.py
+./parse.py && mv output.txt pkg.lst && ./pull.sh | tee output.txt
