@@ -59,7 +59,7 @@ sub check_rate_limit {
         warn "Rate limit: $remaining requests remaining.";
 
         while ($remaining < 2) {
-            sleep 10;
+            sleep 60;
 
             my $res = $ua->get("https://api.github.com/rate_limit?client_id=$CLIENT_ID&client_secret=$CLIENT_SECRET");
 
