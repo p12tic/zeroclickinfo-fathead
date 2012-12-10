@@ -2,4 +2,4 @@
 
 mkdir -p download;
 
-perl fetch.pl > download/data.txt;
+perl fetch.pl download/data.txt;

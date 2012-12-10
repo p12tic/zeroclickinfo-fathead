@@ -6,13 +6,17 @@ use warnings;
 use LWP::UserAgent;
 use JSON::XS;
 use Data::Dumper;
+use FileHandle;
 
 my $CLIENT_ID = $ENV{GITHUB_FATHEAD_CLIENT_ID};
 my $CLIENT_SECRET = $ENV{GITHUB_FATHEAD_CLIENT_SECRET};
 
 my $ua = LWP::UserAgent->new;
 
-my @repos;
+my $fh = FileHandle->new;
+
+$fh->open("> $ARGV[0]");
+$fh->autoflush(1);
 
 my $last_seen = 0;
 my $done = 0;
@@ -33,21 +37,17 @@ while (!$done) {
         $last_seen = $1;
     }
 
-    my $page = decode_json($res->content);
-
-    if (@$page == 0) {
+    if ($res->content eq '[]') {
         $done = 1;
     }
 
-    push (@repos, @$page);
+    print $fh $res->content . "\n";
 
     warn $last_seen;
 
     check_rate_limit($res->header('X-RateLimit-Remaining'));
 
 }
-
-print encode_json(\@repos);
 
 sub check_rate_limit {
     my $remaining = shift @_;
