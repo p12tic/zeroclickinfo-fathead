@@ -6,10 +6,10 @@ use warnings;
 use JSON::XS;
 use Data::Dumper;
 
-use DateTime::Format::ISO8601;
+use encoding "utf-8";
 
-open(IN, '<', 'data-head.txt');
-open(OUT, '>', 'output.txt');
+open(IN, "<:encoding(ISO-8859-1)", "data-head.txt");
+open(OUT, ">:encoding(UTF-8)", "output.txt");
 
 my %dups;
 
