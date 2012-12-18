@@ -27,8 +27,12 @@ while (my $line = <IN>) {
 
         my $abstract = '';
 
-        $abstract .= "<i>Owner</i>: $repo->{owner}->{login}<br>";
-        $abstract .= "<i>Description</i>: $repo->{description}<br>";
+        my $description = lcfirst $repo->{description};
+        $description =~ s/\.$//;
+
+        my $owner = $repo->{owner}->{login};
+
+        $abstract .= "Software Description: $description (created by $owner).";
 
         my @output = (
             $repo->{name},          # Title
