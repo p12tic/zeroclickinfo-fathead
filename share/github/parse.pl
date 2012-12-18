@@ -32,7 +32,7 @@ while (my $line = <IN>) {
 
         my $owner = $repo->{owner}->{login};
 
-        $abstract .= "Software Description: $description (created by $owner).";
+        $abstract .= "Software description: $description (created by $owner).";
 
         my @output = (
             $repo->{name},          # Title
