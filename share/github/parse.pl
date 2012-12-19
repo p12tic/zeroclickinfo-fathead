@@ -29,6 +29,8 @@ while (my $line = <IN>) {
 
         my $description = $repo->{description};
 
+        next if !$description;
+
         # Lowercase the first letter unless it's part of an abbreviation
         my $first_is_abbr = 0;
 
