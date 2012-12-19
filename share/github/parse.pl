@@ -27,7 +27,17 @@ while (my $line = <IN>) {
 
         my $abstract = '';
 
-        my $description = lcfirst $repo->{description};
+        my $description = $repo->{description};
+
+        # Lowercase the first letter unless it's part of an abbreviation
+        my $first_is_abbr = 0;
+
+        if ($description =~ m/^[A-Z0-9]{2,}\b/) {
+            $first_is_abbr = 1;
+        }
+
+        $description = lcfirst($description) unless $first_is_abbr;
+
         $description =~ s/\.$//;
 
         my $owner = $repo->{owner}->{login};
