@@ -106,6 +106,8 @@ sub check_existing {
     my $old_url = "$repos{$repo->{name}}->{url}?client_id=$CLIENT_ID&client_secret=$CLIENT_SECRET";
     my $old_repo_full = decode_json(call_github_api($old_url));
 
+    return 1 if ref($old_repo_full) ne "HASH" or ref($new_repo_full) ne "HASH";
+
     if ($new_repo_full->{watchers_count} > $old_repo_full->{watchers_count}) {
         return 0;
     }
