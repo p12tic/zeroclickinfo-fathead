@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 from collections import namedtuple
-import json, itertools, urllib, re
+import json, itertools, re, urllib.parse
 
 ABSTRACT_TEMPLATE = """
 <style>
@@ -76,7 +76,7 @@ def minify_whitespace(s):
     return WHITESPACE_PATTERN.sub(' ', s)
 
 def ddg_search_url(query):
-    return 'https://duckduckgo.com/?%s' % urllib.urlencode({'q':query})
+    return 'https://duckduckgo.com/?%s' % urllib.parse.urlencode({'q':query})
 
 def format_keywords(keywords):
     linked_kw = ['<a href="%s">%s</a>' % (ddg_search_url(kw), kw.lower())
