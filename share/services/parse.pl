@@ -10,10 +10,28 @@ my $iana = $xs->XMLin('port-numbers.iana', ForceArray => 1, KeyAttr => 0);
 
 my $records = $iana->{record};
 
-map {
-    print "[$_->{protocol}[0]] $_->{number}[0]"
-        . (exists $_->{description} and $_->{description}[0] ne '' ?
-            " - $_->{description}[0]" : '')
-        . "\n"
-        if exists $_->{number} and exists $_->{protocol};
-} @{$records};
+open my $output, '>', 'output.txt';
+for my $record (@{$records}) {
+    if (exists $record->{number} and exists $record->{protocol}) {
+        my $result = "[$record->{protocol}[0]] $record->{number}[0]"
+                    . (exists $record->{description} and $record->{description}[0] ne '' ?
+                        " - $record->{description}[0]" : '')
+                    . "\n";
+        print $output join "\t", (
+            $record->{number}[0],                # title
+            "A",                                 # type
+            "",                                  # redirect
+            "",                                  # otheruses
+            "services",                          # categories
+            "",                                  # references
+            "",                                  # see_also
+            "",                                  # further_reading
+            "",                                  # external_links
+            "",                                  # disambiguation
+            "",                                  # images
+            $result,                             # abstract
+            "https://www.iana.org/protocols\n"   # source_url
+        );
+    }
+}
+close $output;
