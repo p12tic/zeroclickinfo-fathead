@@ -13,11 +13,12 @@ my $records = $iana->{record};
 my %results;
 
 for my $record (@{$records}) {
-    if (exists $record->{number} and exists $record->{protocol}) {
+    if (exists $record->{number}) {
         $results{$record->{number}[0]} =
                 (exists $results{$record->{number}[0]} ?
                     "$results{$record->{number}[0]}<br>" : '')
-                . "[$record->{protocol}[0]] $record->{number}[0]"
+                . (exists $record->{protocol} ? "[$record->{protocol}[0]]" : 'Port')
+                . " $record->{number}[0]"
                 . (exists $record->{description} and $record->{description}[0] ne '' ?
                     " - $record->{description}[0]" : '');
     }
