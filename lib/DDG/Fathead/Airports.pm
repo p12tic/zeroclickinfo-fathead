@@ -1,4 +1,4 @@
-package DDG::Fathead::ArchPkgs;
+package DDG::Fathead::Airports;
 
 use DDG::Fathead;
 
@@ -6,9 +6,9 @@ primary_example_queries "iata vie";
 
 secondary_example_queries
     "icao jfk",
-    "iata charles du galle";
+    "iata jacksonville international airport";
 
-description "Airport IATA/ICAO codes";
+description "IATA/ICAO Airport codes";
 
 name "Airports";
 
@@ -20,7 +20,7 @@ code_url "https://github.com/duckduckgo/zeroclickinfo-fathead/tree/master/share/
 
 topics "special_interest";
 
-category "aviation";
+category "ids";
 
 attribution
     github => ['https://github.com/mellon85', 'mellon85'];
