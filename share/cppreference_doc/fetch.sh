@@ -1,4 +1,5 @@
 #!/bin/bash
+rm -rf download
 mkdir -p download
 
 pushd download > /dev/null
